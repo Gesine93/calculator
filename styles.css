@@ -24,7 +24,7 @@ body {
 #result {
     width: 20rem;
     height: 2.5rem;
-    border: 3px solid var(--colorTwo);
+    border: 3px solid var(--colorFour);
     border-radius: 0.25rem;
     font-size: 1.5rem;
     color: var(--colorTwo);
