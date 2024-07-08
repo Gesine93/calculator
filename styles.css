@@ -27,7 +27,7 @@ body {
     border: 3px solid var(--colorFour);
     border-radius: 0.25rem;
     font-size: 1.5rem;
-    color: var(--colorTwo);
+    color: var(--colorFour);
     display: flex;
     align-items: center;
     justify-content: center;
