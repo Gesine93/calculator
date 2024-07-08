@@ -2,6 +2,7 @@
     --colorOne: hsl(238, 40%, 24%);
     --colorTwo: hwb(31 1% 1%);
     --colorThree: hsl(238, 40%, 19%);
+    --colorFour: hwb(17 1% 1%);
     --font: sans-serif;
 }
 
@@ -40,6 +41,7 @@ body {
     width: 100%;
     text-align: left;
     color: var(--colorTwo);
+    letter-spacing: 0.1rem;
 }
 
 button {
@@ -64,7 +66,8 @@ button:hover {
     width: 45%;
 }
 
-#signs button#clear {
+#signs button#clear,
+#signs button#equals {
     width: 100%;
 }
 
@@ -95,4 +98,10 @@ button:hover {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+#clear,
+#equals {
+    color: var(--colorFour);
+    border: 3px solid var(--colorFour);
 }
