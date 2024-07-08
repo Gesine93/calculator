@@ -60,43 +60,56 @@ addEventListener("DOMContentLoaded", (event) => {
                 firstNum = "";
                 secondNum = "";
                 operator = undefined;
-            } else if (button.id==="remove") {
-                last = display.textContent.slice(-1);
-                if (operatorClicked) {
-                    if operators.includes(last) {
-                        operatorClicked = false;
-                        display.textContent = display.textContent.slice(0,-1);
-                    } else if (!secondNum === "") {
-                        secondNum = secondNum.splice(0,-1);
-                        display.textContent = display.textContent.slice(0,-1);
-                    } else if (!firstNum === "") {
-                        firstNum = firstNum.splice(0,-1);
-                        display.textContent = display.textContent.slice(0,-1);
-                    }
-                }
+            } else if (button.id === "remove") {
+                removeLastEntry();
             }
-        })
-    })    
-})
+        });
+    });
+
+    function removeLastEntry() {
+        if (equalClicked) {
+            // If equal was clicked, reset everything
+            firstNum = result.toString();
+            secondNum = "";
+            operator = undefined;
+            displayText = result.toString();
+            equalClicked = false;
+            operatorClicked = false;
+        } else if (secondNum !== "") {
+            // If we're inputting the second number, remove from it
+            secondNum = secondNum.slice(0, -1);
+            displayText = displayText.slice(0, -1);
+        } else if (operatorClicked) {
+            // If operator was clicked, remove the operator
+            operator = undefined;
+            operatorClicked = false;
+            displayText = displayText.slice(0, -1);
+        } else if (firstNum !== "") {
+            // If we're inputting the first number, remove from it
+            firstNum = firstNum.slice(0, -1);
+            displayText = displayText.slice(0, -1);
+        }
+        display.textContent = displayText;
+    }
+});
 
 function add(a,b) {
-    num = Number(a) + Number(b);
+    let num = Number(a) + Number(b);
     return roundToThree(num);
 }
 
 function subtract(a,b) {
-    num = Number(a) - Number(b);
+    let num = Number(a) - Number(b);
     return roundToThree(num);
-
 }
 
 function multiply(a,b) {
-    num = Number(a) * Number(b);
+    let num = Number(a) * Number(b);
     return roundToThree(num);
 }
 
 function divide(a,b) {
-    num = Number(a) / Number(b);
+    let num = Number(a) / Number(b);
     return roundToThree(num);
 }
 
