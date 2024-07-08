@@ -12,59 +12,64 @@ addEventListener("DOMContentLoaded", (event) => {
     
     let buttons = document.querySelectorAll("button");
     buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (numbers.includes(button.textContent)) {
-                if (operatorClicked) {
-                    secondNum += button.textContent;
-                    displayText += button.textContent;
-                    display.textContent = displayText;
-                } else if (!equalClicked) {
-                    firstNum += button.textContent;
-                    displayText += button.textContent;
-                    display.textContent = displayText;
-                }
-            } else if (operators.includes(button.textContent)) {
-                if (!operatorClicked && display.textContent != "") {
-                    operator = button.textContent;
-                    operatorClicked = true;
-                    displayText += button.textContent;
-                    display.textContent = displayText;
-                }
-            } else if (operatorClicked && button.textContent === "." && !secondNum.includes(".")) {
+        button.addEventListener('click', handleButtonClick);
+        button.addEventListener('touchstart', handleButtonClick);
+    });
+
+    function handleButtonClick(event) {
+        event.preventDefault(); // Prevent default touch behavior
+        const button = event.target;
+        if (numbers.includes(button.textContent)) {
+            if (operatorClicked) {
                 secondNum += button.textContent;
                 displayText += button.textContent;
                 display.textContent = displayText;
-            } else if (!equalClicked && button.textContent === "." && !firstNum.includes(".")) {
+            } else if (!equalClicked) {
                 firstNum += button.textContent;
                 displayText += button.textContent;
                 display.textContent = displayText;
-            } else if (button.textContent === "=") {
-                equalClicked = true;
-                operatorClicked = false;
-                if (secondNum === "") {
-                    result = firstNum;
-                    displayText = result;
-                    display.textContent = displayText;
-                } else if (firstNum != "" && secondNum != "") {
-                    result = operate(firstNum, secondNum, operator);
-                    displayText = result;
-                    firstNum = result;
-                    display.textContent = result;
-                    secondNum = "";
-                }    
-            } else if (button.id === "clear") {
-                operatorClicked = false;
-                equalClicked = false;
-                displayText = "";
-                display.textContent = displayText;
-                firstNum = "";
-                secondNum = "";
-                operator = undefined;
-            } else if (button.id === "remove") {
-                removeLastEntry();
             }
-        });
-    });
+        } else if (operators.includes(button.textContent)) {
+            if (!operatorClicked && display.textContent != "") {
+                operator = button.textContent;
+                operatorClicked = true;
+                displayText += button.textContent;
+                display.textContent = displayText;
+            }
+        } else if (operatorClicked && button.textContent === "." && !secondNum.includes(".")) {
+            secondNum += button.textContent;
+            displayText += button.textContent;
+            display.textContent = displayText;
+        } else if (!equalClicked && button.textContent === "." && !firstNum.includes(".")) {
+            firstNum += button.textContent;
+            displayText += button.textContent;
+            display.textContent = displayText;
+        } else if (button.textContent === "=") {
+            equalClicked = true;
+            operatorClicked = false;
+            if (secondNum === "") {
+                result = firstNum;
+                displayText = result;
+                display.textContent = displayText;
+            } else if (firstNum != "" && secondNum != "") {
+                result = operate(firstNum, secondNum, operator);
+                displayText = result;
+                firstNum = result;
+                display.textContent = result;
+                secondNum = "";
+            }    
+        } else if (button.id === "clear") {
+            operatorClicked = false;
+            equalClicked = false;
+            displayText = "";
+            display.textContent = displayText;
+            firstNum = "";
+            secondNum = "";
+            operator = undefined;
+        } else if (button.id === "remove") {
+            removeLastEntry();
+        }
+    }
 
     function removeLastEntry() {
         if (equalClicked) {
@@ -93,22 +98,22 @@ addEventListener("DOMContentLoaded", (event) => {
     }
 });
 
-function add(a,b) {
+function add(a, b) {
     let num = Number(a) + Number(b);
     return roundToThree(num);
 }
 
-function subtract(a,b) {
+function subtract(a, b) {
     let num = Number(a) - Number(b);
     return roundToThree(num);
 }
 
-function multiply(a,b) {
+function multiply(a, b) {
     let num = Number(a) * Number(b);
     return roundToThree(num);
 }
 
-function divide(a,b) {
+function divide(a, b) {
     let num = Number(a) / Number(b);
     return roundToThree(num);
 }
@@ -128,5 +133,5 @@ function operate(firstNum, secondNum, operator) {
 }
 
 function roundToThree(num) {
-    return +(Math.round(num + "e+3")  + "e-3");
+    return +(Math.round(num + "e+3") + "e-3");
 }
