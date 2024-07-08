@@ -24,7 +24,7 @@ addEventListener("DOMContentLoaded", (event) => {
                     display.textContent = displayText;
                 }
             } else if (operators.includes(button.textContent)) {
-                if (!operatorClicked) {
+                if (!operatorClicked && display.textContent != "") {
                     operator = button.textContent;
                     operatorClicked = true;
                     displayText += button.textContent;
