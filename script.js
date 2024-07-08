@@ -10,7 +10,7 @@ addEventListener("DOMContentLoaded", (event) => {
     let equalClicked = false;
     let result;
     
-    let buttons = document.querySelectorAll(".button");
+    let buttons = document.querySelectorAll("button");
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             if (numbers.includes(button.textContent)) {
@@ -24,31 +24,34 @@ addEventListener("DOMContentLoaded", (event) => {
                     display.textContent = displayText;
                 }
             } else if (operators.includes(button.textContent)) {
-                operator = button.textContent;
-                operatorClicked = true;
-                displayText += button.textContent;
-                display.textContent = displayText;
+                if (!operatorClicked) {
+                    operator = button.textContent;
+                    operatorClicked = true;
+                    displayText += button.textContent;
+                    display.textContent = displayText;
+                }
             } else if (button.textContent === "=") {
                 equalClicked = true;
                 operatorClicked = false;
-                if (secondNum === undefined) {
+                if (secondNum === "") {
                     result = firstNum;
                     displayText = result;
                     display.textContent = displayText;
-                } else if (firstNum === undefined) {
-                    equalClicked = false;
-                }
-                else {
+                } else if (firstNum != "" && secondNum != "") {
                     result = operate(firstNum, secondNum, operator);
                     displayText = result;
                     firstNum = result;
                     display.textContent = result;
+                    secondNum = "";
                 }    
             } else if (button.id === "clear") {
                 operatorClicked = false;
                 equalClicked = false;
                 displayText = "";
                 display.textContent = displayText;
+                firstNum = "";
+                secondNum = "";
+                operator = undefined;
             }
         })
     })    
@@ -56,19 +59,19 @@ addEventListener("DOMContentLoaded", (event) => {
 
 
 function add(a,b) {
-    return a+b;
+    return Number(a)+Number(b);
 }
 
 function subtract(a,b) {
-    return a-b;
+    return Number(a)-Number(b);
 }
 
 function multiply(a,b) {
-    return a*b;
+    return Number(a)*Number(b);
 }
 
 function divide(a,b) {
-    return a/b;
+    return Number(a)/Number(b);
 }
 
 function operate(firstNum, secondNum, operator) {
