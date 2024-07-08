@@ -60,6 +60,20 @@ addEventListener("DOMContentLoaded", (event) => {
                 firstNum = "";
                 secondNum = "";
                 operator = undefined;
+            } else if (button.id==="remove") {
+                last = display.textContent.slice(-1);
+                if (operatorClicked) {
+                    if operators.includes(last) {
+                        operatorClicked = false;
+                        display.textContent = display.textContent.slice(0,-1);
+                    } else if (!secondNum === "") {
+                        secondNum = secondNum.splice(0,-1);
+                        display.textContent = display.textContent.slice(0,-1);
+                    } else if (!firstNum === "") {
+                        firstNum = firstNum.splice(0,-1);
+                        display.textContent = display.textContent.slice(0,-1);
+                    }
+                }
             }
         })
     })    
