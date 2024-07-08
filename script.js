@@ -5,7 +5,7 @@ addEventListener("DOMContentLoaded", (event) => {
     let display = document.querySelector("#display");
     let displayText = "";
     let numbers = ["1","2","3","4","5","6","7","8","9","0"];
-    let operators = ["+", "-", "*", "/"];
+    let operators = ["+", "-", "×", "÷"];
     let operatorClicked = false;
     let equalClicked = false;
     let result;
@@ -57,21 +57,20 @@ addEventListener("DOMContentLoaded", (event) => {
     })    
 })
 
-
 function add(a,b) {
-    return Number(a)+Number(b);
+    return Number(a) + Number(b);
 }
 
 function subtract(a,b) {
-    return Number(a)-Number(b);
+    return Number(a) - Number(b);
 }
 
 function multiply(a,b) {
-    return Number(a)*Number(b);
+    return Number(a) * Number(b);
 }
 
 function divide(a,b) {
-    return Number(a)/Number(b);
+    return Number(a) / Number(b);
 }
 
 function operate(firstNum, secondNum, operator) {
@@ -80,10 +79,10 @@ function operate(firstNum, secondNum, operator) {
         result = add(firstNum, secondNum);
     } else if (operator === "-") {
         result = subtract(firstNum, secondNum);
-    } else if (operator === "*") {
+    } else if (operator === "×") {
         result = multiply(firstNum, secondNum);
-    } else if (operator === "/") {
+    } else if (operator === "÷") {
         result = divide(firstNum, secondNum);
-    };
+    }
     return result;
 }
